@@ -4,6 +4,7 @@ defmodule GenserverAndTaskDemo.Application do
   @moduledoc false
 
   use Application
+  alias GenserverAndTaskDemo.Foo
 
   @impl true
   def start(_type, _args) do
@@ -12,6 +13,8 @@ defmodule GenserverAndTaskDemo.Application do
       GenserverAndTaskDemoWeb.Telemetry,
       # Start the PubSub system
       {Phoenix.PubSub, name: GenserverAndTaskDemo.PubSub},
+      Foo,
+      {Task.Supervisor, name: Foo.task_supervisor_name()},
       # Start the Endpoint (http/https)
       GenserverAndTaskDemoWeb.Endpoint
       # Start a worker by calling: GenserverAndTaskDemo.Worker.start_link(arg)
